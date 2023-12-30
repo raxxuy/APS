@@ -37,7 +37,7 @@ class AdjacencyMatrixGraph {
     }
 
     private void findMinimumPath(int i, int j, ArrayList<String> visited, Set<List<String>> paths) {
-        if (visited.contains(String.format("%d,%d", i, j))) return;
+        if (matrix[i][j].equals("#") || visited.contains(String.format("%d,%d", i, j))) return;
 
         visited.add(String.format("%d,%d", i, j));
 
@@ -46,10 +46,10 @@ class AdjacencyMatrixGraph {
             return;
         }
 
-        if (i > 0 && !matrix[i - 1][j].equals("#")) findMinimumPath(i - 1, j, new ArrayList<>(visited), paths);
-        if (j > 0 && !matrix[i][j - 1].equals("#")) findMinimumPath(i, j - 1, new ArrayList<>(visited), paths);
-        if (i < matrix.length - 1 && !matrix[i + 1][j].equals("#")) findMinimumPath(i + 1, j, new ArrayList<>(visited), paths);
-        if (j < matrix[0].length - 1 && !matrix[i][j + 1].equals("#")) findMinimumPath(i, j + 1, new ArrayList<>(visited), paths);
+        if (i > 0) findMinimumPath(i - 1, j, new ArrayList<>(visited), paths);
+        if (j > 0) findMinimumPath(i, j - 1, new ArrayList<>(visited), paths);
+        if (i < matrix.length - 1) findMinimumPath(i + 1, j, new ArrayList<>(visited), paths);
+        if (j < matrix[0].length - 1) findMinimumPath(i, j + 1, new ArrayList<>(visited), paths);
     }
 }
 
